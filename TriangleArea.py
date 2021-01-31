@@ -27,13 +27,12 @@ while not validFloat:
 
 validFloat = False
 while not validFloat:
-    angleC = input("Enter a number for side b\n")
+    angleC = input("Enter a number for angle C\n")
     if angleC.isnumeric():
         angleC = float(angleC)
         validFloat = True
     else:
         print("Input a valid real number")
-angleC = float(input("Enter the number for angle C in degrees\n"))
 
 
 area = 0.5 * sideA * sideB * math.sin(convertRadians(angleC))
