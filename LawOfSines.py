@@ -74,6 +74,7 @@ def calculateAngle():
         print("Angle B =\n" + str(angleB) + "\n" + str(angleB2))
 
 
+print("Law of Sines")
 validInt = False
 while not validInt:
     decision = input("Press 1 to calculate a side\nPress 2 to calculate an angle\n")
