@@ -1,11 +1,6 @@
 # This script calculates the area of a triangle using two sides and an angle
+import AngleConversions
 import math
-
-
-def convertRadians(angle):
-    angle = float(angle)
-    return (angle * math.pi) / 180
-
 
 validFloat = False
 while not validFloat:
@@ -35,5 +30,5 @@ while not validFloat:
         print("Input a valid real number")
 
 
-area = 0.5 * sideA * sideB * math.sin(convertRadians(angleC))
+area = 0.5 * sideA * sideB * math.sin(AngleConversions.convertRadians(angleC))
 print("The area of a triangle is " + str(area))
