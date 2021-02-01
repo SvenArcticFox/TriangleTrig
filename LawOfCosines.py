@@ -1,69 +1,42 @@
+# This script calculates an angle or a side using law of cosines
 import math
-import AngleConversions
+
+
+def validFloatInput():
+    try:
+        inputFloat = float(input("> "))
+        return inputFloat
+    except ValueError:
+        print("Enter a valid number")
+        validFloatInput()
 
 
 def calculateSide():
-    validFloat = False
-    while not validFloat:
-        sideA = input("Enter a number for side a\n")
-        if sideA.isnumeric():
-            sideA = float(sideA)
-            validFloat = True
-        else:
-            print("Input a valid real number")
+    print("Enter a number for side a")
+    sideA = validFloatInput()
 
-    validFloat = False
-    while not validFloat:
-        sideB = input("Enter a number side b\n")
-        if sideB.isnumeric():
-            sideB = float(sideB)
-            validFloat = True
-        else:
-            print("Input a valid real number")
+    print("Enter a valid number for side b")
+    sideB = validFloatInput()
 
-    validFloat = False
-    while not validFloat:
-        angleC = input("Enter a number for angle C in degrees\n")
-        if angleC.isnumeric():
-            angleC = float(angleC)
-            validFloat = True
-        else:
-            print("Input a valid real number")
+    print("Enter a number for angle C in degrees")
+    angleC = validFloatInput()
 
-    sideC = \
-        math.pow(sideA, 2) + math.pow(sideB, 2) - 2 * sideA * sideB * math.cos(AngleConversions.convertRadians(angleC))
-
+    sideC = math.pow(sideA, 2) + math.pow(sideB, 2) - 2 * sideA * sideB * math.cos(math.radians(angleC))
     print("Side C Squared = " + str(sideC))
+
     sideC = math.sqrt(sideC)
     print("Side C = " + str(sideC))
 
+
 def calculateAngle():
-    validFloat = False
-    while not validFloat:
-        sideA = input("Enter a number for side a\n")
-        if sideA.isnumeric():
-            sideA = float(sideA)
-            validFloat = True
-        else:
-            print("Input a valid real number")
+    print("Enter a number for side a")
+    sideA = validFloatInput()
 
-    validFloat = False
-    while not validFloat:
-        sideB = input("Enter a number side b\n")
-        if sideB.isnumeric():
-            sideB = float(sideB)
-            validFloat = True
-        else:
-            print("Input a valid real number")
+    print("Enter a number for side b")
+    sideB = validFloatInput()
 
-    validFloat = False
-    while not validFloat:
-        sideC = input("Enter a number for side c\n")
-        if sideC.isnumeric():
-            sideC = float(sideC)
-            validFloat = True
-        else:
-            print("Input a valid real number")
+    print("Enter a number for side c")
+    sideC = validFloatInput()
 
     sideC = math.pow(sideC, 2)
     d = math.pow(sideA, 2) + math.pow(sideB, 2)
@@ -72,12 +45,12 @@ def calculateAngle():
     e = sideC / e
 
     if e < 0:
-        alpha = AngleConversions.convertDegrees(math.acos(abs(e)))
+        alpha = math.degrees(math.acos(abs(e)))
         print("Alpha = " + str(alpha))
         angleC = 180 - alpha
         print("Angle C = " + str(angleC))
     else:
-        angleC = AngleConversions.convertDegrees(math.acos(abs(e)))
+        angleC = math.degrees(math.acos(abs(e)))
         print("Alpha = " + str(angleC))
         print("Angle C = " + str(angleC))
 

@@ -20,5 +20,5 @@ sideB = validFloatInput()
 print("Enter a number for angle C in degrees")
 angleC = validFloatInput()
 
-area = 0.5 * sideA * sideB * math.sin(math.degrees(angleC))
+area = 0.5 * sideA * sideB * math.sin(math.radians(angleC))
 print("The area of a triangle is " + str(area))
