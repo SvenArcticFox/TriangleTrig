@@ -86,7 +86,7 @@ print("Law of Cosines")
 validInt = False
 while not validInt:
     decision = input("Press 1 to calculate a side\nPress 2 to calculate an angle\n")
-    if decision.isnumeric() and (decision == '1' or decision == '2'):
+    if decision == '1' or decision == '2':
         validInt = True
         decision = int(decision)
         if decision == 1:
