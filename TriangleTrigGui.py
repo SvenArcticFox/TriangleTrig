@@ -12,7 +12,8 @@ root.maxsize(240, 125)
 
 def triangleArea():
     window = Toplevel(root)
-    window.minsize(290 , 205)
+    window.minsize(290 , 230)
+    window.maxsize(290 , 230)
     window.title("Area of a Triangle")
 
     # Initializes everything for side A
@@ -35,7 +36,11 @@ def triangleArea():
 
     # Initializes everything for the area label
     areaLabel = Label(window , font = ("Arial" , 12))
-    areaLabel.grid(row = 4 , pady = 10 , padx = 10 , sticky = N, columnspan = 4)
+    areaLabel.grid(row = 5 , pady = 10 , padx = 10 , sticky = N , columnspan = 4)
+
+    # Label that tells users that angle measurements are in degrees.
+    degreeLabel = Label(window , text = "All angle measurements are in degrees." , font = ("Arial" , 10))
+    degreeLabel.grid(row = 3 , pady = 10 , padx = 10 , sticky = N , columnspan = 4)
 
     # Calculates the actual area of the triangle
     def calculate():
@@ -52,13 +57,20 @@ def triangleArea():
 
     # Initializes everything for the calculate button
     calculate = Button(window , text = "Calculate" , command = calculate)
-    calculate.grid(pady = 10 , padx = 10 , sticky = N, columnspan = 5)
+    calculate.grid(row = 4 , pady = 10 , padx = 10 , sticky = N, columnspan = 5)
 
 
 def lawOfSines():
+    toggle = float()
     window = Toplevel(root)
-    window.geometry('200x200')
+    window.minsize(290 , 205)
     window.title("Law of Sines")
+
+    # Initializes the radio buttons
+    angleRadioButton = Radiobutton(window , text = "Calculate an Angle" , value = 1 , variable = toggle)
+    angleRadioButton.grid(column = 0 , row = 0 , padx = 10 , pady = 10)
+    sideRadioButton = Radiobutton(window , text = "Calculate a Side" , value = 2 , variable = toggle)
+    sideRadioButton.grid(row = 0 , column = 1 , padx = 5 , pady = 10)
 
 
 def lawOfCosines():
