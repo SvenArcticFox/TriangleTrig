@@ -109,26 +109,32 @@ def lawOfSines():
 
         # Calculates the angle of a triangle using the law of sins
         def calculateAngle():
-            angleA = float(angleAText.get(1.0, 'end-1c'))
-            sideA = float(sideAText.get(1.0, 'end-1c'))
-            sideB = float(sideOrAngleBText.get(1.0, 'end-1c'))
+            try:
+                angleA = float(angleAText.get(1.0, 'end-1c'))
+                sideA = float(sideAText.get(1.0, 'end-1c'))
+                sideB = float(sideOrAngleBText.get(1.0, 'end-1c'))
 
-            sinB = (sideB * math.sin(math.radians(angleA))) / sideA
-            if sinB > 1 or sinB < 0:
-                answerLabel.config(text = "There are no possible angles that will work in this triangle.")
-            else:
-                angleB = math.degrees(math.asin(sinB))
-                angleB2 = 180 - angleB
-                answerLabel.config(text = "Angle B is " + str(angleB) + " or " + str(angleB2) + ".")
+                sinB = (sideB * math.sin(math.radians(angleA))) / sideA
+                if sinB > 1 or sinB < 0:
+                    answerLabel.config(text = "There are no possible angles that will work in this triangle.")
+                else:
+                    angleB = math.degrees(math.asin(sinB))
+                    angleB2 = 180 - angleB
+                    answerLabel.config(text = "Angle B is " + str(angleB) + " or " + str(angleB2) + ".")
+            except ValueError:
+                showerror("Invalid Number", "Make sure all numbers are valid!")
 
         # Calculates the side of a triangle using the law of sins
         def calculateSide():
-            angleA = float(angleAText.get(1.0, 'end-1c'))
-            sideA = float(sideAText.get(1.0, 'end-1c'))
-            angleB = float(sideOrAngleBText.get(1.0, 'end-1c'))
+            try:
+                angleA = float(angleAText.get(1.0, 'end-1c'))
+                sideA = float(sideAText.get(1.0, 'end-1c'))
+                angleB = float(sideOrAngleBText.get(1.0, 'end-1c'))
 
-            sideB = (sideA * math.sin(math.radians(angleB))) / math.sin(math.radians(angleA))
-            answerLabel.config(text = "Side B is " + str(sideB) + ".")
+                sideB = (sideA * math.sin(math.radians(angleB))) / math.sin(math.radians(angleA))
+                answerLabel.config(text = "Side B is " + str(sideB) + ".")
+            except ValueError:
+                showerror("Invalid Number", "Make sure all numbers are valid!")
 
         if toggle.get() == 1:
             calculateAngle()
