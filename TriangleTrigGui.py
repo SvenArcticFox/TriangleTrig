@@ -147,9 +147,97 @@ def lawOfSines():
 
 def lawOfCosines():
     window = Toplevel(root)
-    window.geometry('200x200')
+    window.minsize(290 , 205)
     window.title("Law of Cosines")
 
+    # Initializes the radio buttons and toggle variable
+    toggle = IntVar()
+    angleRadioButton = Radiobutton(window , text = "Calculate an Angle" , value = 1 , variable = toggle)
+    angleRadioButton.grid(column = 0 , row = 0 , padx = 10 , pady = 10)
+    sideRadioButton = Radiobutton(window , text = "Calculate a Side" , value = 2 , variable = toggle)
+    sideRadioButton.grid(row = 0 , column = 1 , padx = 5 , pady = 10)
+
+    # Initializes everything for side A
+    sideALabel = Label(window , text = "Side A:" , borderwidth = 5 , font = ("Arial" , 10))
+    sideALabel.grid(row = 1 , column = 0 , padx = 10 , pady = 7)
+    sideAText = Text(window , height = 1 , width = 25 , font = ("Arial", 10))
+    sideAText.grid(row = 1, column = 1 , padx = 2 , pady = 7)
+
+    # Initializes everything for side A
+    sideBLabel = Label(window , text = "Angle B:" , borderwidth = 5 , font = ("Arial" , 10))
+    sideBLabel.grid(row = 2 , column = 0 , padx = 10 , pady = 7)
+    sideBText = Text(window , height = 1 , width = 25 , font = ("Arial", 10))
+    sideBText.grid(row = 2, column = 1 , padx = 2 , pady = 7)
+
+    # Initializes everything for side B
+    sideOrAngleCLabel = Label(window , text = "Side/Angle C:" , borderwidth = 2 , font = ("Arial" , 10))
+    sideOrAngleCLabel.grid(row = 3 , column = 0 , padx = 10 , pady = 7)
+    sideOrAngleCText = Text(window , height = 1 , width = 25 , font = ("Arial" , 10))
+    sideOrAngleCText.grid(row = 3 , column = 1 , padx = 2 , pady = 7)
+
+    # Label that tells users that angle measurements are in degrees.
+    degreeLabel = Label(window , text = "All angle measurements are in degrees." , font = ("Arial" , 10))
+    degreeLabel.grid(row = 4 , pady = 10 , padx = 10 , sticky = N , columnspan = 4)
+
+    # Label that tells the user what side/angle B means
+    cMeaningLabel = Label(window , text = "Side C is used when calculating an angle. "
+                                          "Angle C is used when calculating a side."
+                          , font = ("Arial" , 10))
+    cMeaningLabel.grid(row = 5 , pady = 10 , padx = 10 , sticky = N , columnspan = 4)
+
+    # Initializes everything for the answer label
+    answerLabel = Label(window , font = ("Arial" , 12))
+    answerLabel.grid(row = 7 , pady = 10 , padx = 10 , sticky = N , columnspan = 4)
+
+    def calculate():
+
+        # Calculates the angle of a triangle using the law of cos
+        def calculateAngle():
+            try:
+                sideA = float(sideAText.get(1.0, 'end-1c'))
+                sideB = float(sideBText.get(1.0, 'end-1c'))
+                sideC = float(sideOrAngleCText.get(1.0, 'end-1c'))
+
+                sideC = math.pow(sideC, 2)
+                d = math.pow(sideA, 2) + math.pow(sideB, 2)
+                e = -2 * sideA * sideB
+                sideC -= d
+                e = sideC / e
+
+                if e < 0:
+                    alpha = math.degrees(math.acos(abs(e)))
+                    angleC = 180 - alpha
+                    answerLabel.config(text = "Alpha = " + str(alpha) + ". Angle C = " + str(angleC) + ".")
+
+                else:
+                    angleC = math.degrees(math.acos(abs(e)))
+                    answerLabel.config(text = "Alpha = " + str(angleC) + ". Angle C = " + str(angleC) + ".")
+
+            except ValueError:
+                showerror("Invalid Number", "Make sure all numbers are valid!")
+
+        # Calculates the side of a triangle using the law of cos
+        def calculateSide():
+            try:
+                sideA = float(sideAText.get(1.0, 'end-1c'))
+                sideB = float(sideAText.get(1.0, 'end-1c'))
+                angleC = float(sideOrAngleCText.get(1.0, 'end-1c'))
+
+                sideCSquared = \
+                    math.pow(sideA, 2) + math.pow(sideB, 2) - 2 * sideA * sideB * math.cos(math.radians(angleC))
+                sideC = math.sqrt(sideCSquared)
+                answerLabel.config(text = "Side C Squared is " + str(sideCSquared) + ". Side C is " + str(sideC) + ".")
+            except ValueError:
+                showerror("Invalid Number", "Make sure all numbers are valid!")
+
+        if toggle.get() == 1:
+            calculateAngle()
+        elif toggle.get() == 2:
+            calculateSide()
+
+    # Initializes everything for the calculate button
+    calculate = Button(window , text = "Calculate" , command = calculate)
+    calculate.grid(row = 6 , pady = 10 , padx = 10 , sticky = N, columnspan = 5)
 
 # Initializes all of the buttons
 triangleAreaButton = Button(root, text="Area of a Triangle", command=triangleArea)
